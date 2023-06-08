@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import FormUserDetails from './FormUserDetail.js';
+import FormPersonalDetails from './FormPersonalDetail.js';
+import Confirm from './Confirm.js';
+import Success from './Success.js';
 
 export class UserForm extends Component {
 	state = {
@@ -23,7 +26,7 @@ export class UserForm extends Component {
 	// Proceed to previous step
 	prevStep = () => {
 		const {step} = this.state;
-		this.setState = ({
+		this.setState({
 			step: step - 1,
 		});
 	};
@@ -40,26 +43,40 @@ export class UserForm extends Component {
 
 		switch (step) {
 			case 1: {
-				return (<FormUserDetails
-					nextStep={this.nextStep}
-					handleChange={this.handleChange}
-					values={values}
-				/>
+				return (
+					<FormUserDetails
+						nextStep={this.nextStep}
+						handleChange={this.handleChange}
+						values={values}
+					/>
 				);
 			}
 
 			case 2: {
-				return <h1>
-          FormPersonalDetails
-				</h1>;
+				return (
+					<FormPersonalDetails
+						nextStep={this.nextStep}
+						prevStep={this.prevStep}
+						handleChange={this.handleChange}
+						values={values}
+					></FormPersonalDetails>
+				);
 			}
 
 			case 3: {
-				return <h1>Confirm</h1>;
+				return (
+					<Confirm
+						nextStep={this.nextStep}
+						prevStep={this.prevStep}
+						values={values}
+					></Confirm>
+				);
 			}
 
 			case 4: {
-				return <h1>Success</h1>;
+				return (
+					<Success></Success>
+				);
 			}
 
 			default: {
